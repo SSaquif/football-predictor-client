@@ -106,7 +106,7 @@ export function SignInButton() {
       });
   };
 
-  return <button onClick={signInWithGoogle}>Sign In</button>;
+  return <button onClick={signInWithGoogle}>Sign In with Google</button>;
 }
 
 export function SignOutButton() {

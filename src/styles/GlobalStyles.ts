@@ -1,13 +1,18 @@
 // globalStyles.js
 import { createGlobalStyle } from "styled-components";
-// TODO: split into variables and reset
+// TODO: split into CSSVariables and CSSReset and GlobalStyles
 const GlobalStyles = createGlobalStyle`
  /*
   CSS Variables
  */
   :root {
+    /* Common Dimensions */
+    --header-height: 60px;
+    --footer-height: 60px;
+    
     /* Background Colors */
     --bg-color-light-primary: #eeeeec;
+    
     /* Box Shadows */
     --shadow-color: 60deg 2% 58%;
     --shadow-elevation-low:
@@ -39,10 +44,10 @@ const GlobalStyles = createGlobalStyle`
   }
   /*
   3a. Allow percentage-based heights in the application
+  3b. Added default bg color 
   */
   html, body, #root {
-    height: 100%;
-    /* TODO: remove bg color from here */
+    height: 100%;    
     background-color: var(--bg-color-light-primary);
   }
   /*

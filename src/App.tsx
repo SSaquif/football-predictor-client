@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { AuthContext, SignOutButton } from "./context/AuthContext";
-import LoginPrompt from "./components/LoginPrompt";
+import LoginPage from "./components/LoginPage";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
@@ -15,7 +15,7 @@ const Container = styled.div`
 const Header = styled.header`
   border: 1px solid yellow;
   /* TODO: replace with css variable */
-  height: 80px;
+  height: var(--header-height);
 `;
 const MainContentContainer = styled.div`
   border: 1px solid greenyellow;
@@ -37,7 +37,7 @@ const RightSidebar = styled.aside`
 `;
 const Footer = styled.footer`
   border: 1px solid red;
-  height: 150px;
+  height: var(--footer-height);
 `;
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
           </Footer>
         </Container>
       ) : (
-        <LoginPrompt />
+        <LoginPage />
       )}
     </BrowserRouter>
   );
