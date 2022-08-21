@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { AuthContext, SignOutButton } from "./context/AuthContext";
 import LoginPrompt from "./components/LoginPrompt";
 import { Toaster } from "react-hot-toast";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
 
 const Container = styled.div`
   /* border: 1rem solid cornflowerblue; */
@@ -41,17 +43,27 @@ const Footer = styled.footer`
 function App() {
   const { user } = useContext(AuthContext);
   return (
-    <Container>
-      <Header>{user ? <SignOutButton /> : "Please sign in"}</Header>
-      <MainContentContainer>
-        <LeftSidebar>Left Sidebar</LeftSidebar>
-        <Main>{user ? "Main" : <LoginPrompt />}</Main>
-        <RightSidebar>Right Sidebar</RightSidebar>
-      </MainContentContainer>
-      <Footer>
-        <Toaster />
-      </Footer>
-    </Container>
+    <BrowserRouter>
+      {user ? (
+        <Container>
+          <Header>{user ? <SignOutButton /> : "Please sign in"}</Header>
+          <MainContentContainer>
+            <LeftSidebar>Left Sidebar</LeftSidebar>
+            <Main>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+              </Routes>
+            </Main>
+            <RightSidebar>Right Sidebar</RightSidebar>
+          </MainContentContainer>
+          <Footer>
+            <Toaster />
+          </Footer>
+        </Container>
+      ) : (
+        <LoginPrompt />
+      )}
+    </BrowserRouter>
   );
 }
 
