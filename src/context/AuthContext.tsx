@@ -38,10 +38,12 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
       const q = query(usersRef, where("uid", "==", user?.uid));
       const snapshot = await getDocs(q);
 
+      // new user
       if (snapshot.empty && user) {
         const { email, phoneNumber, photoURL, uid } = user;
         await addDoc(usersRef, { email, phoneNumber, photoURL, uid });
       }
+
       setUser(user);
     } catch (err: any) {
       const errorLogsRef = collection(db, "errorLogs");
@@ -53,7 +55,7 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
         userEmail: user?.email,
       });
       setUser(null);
-      // TODO: Make toaster cancellable, lessen duration
+      // TODO: Make toaster cancelable, lessen duration
       toast.error("Error creating user", { duration: 5000 });
     } finally {
       setAuthLoading(false);
