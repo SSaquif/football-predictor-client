@@ -1,7 +1,30 @@
 // globalStyles.js
 import { createGlobalStyle } from "styled-components";
-
-const GlobalStyles = createGlobalStyle` 
+// TODO: split into variables and reset
+const GlobalStyles = createGlobalStyle`
+ /*
+  CSS Variables
+ */
+  :root {
+    /* Background Colors */
+    --bg-color-light-primary: #eeeeec;
+    /* Box Shadows */
+    --shadow-color: 60deg 2% 58%;
+    --shadow-elevation-low:
+      0px 0.8px 0.9px hsl(var(--shadow-color) / 0.52),
+      0px 3.3px 3.7px -2.5px hsl(var(--shadow-color) / 0.52);
+    --shadow-elevation-medium:
+      0px 0.8px 0.9px hsl(var(--shadow-color) / 0.48),
+      0px 4.2px 4.7px -1.2px hsl(var(--shadow-color) / 0.48),
+      0.1px 16.3px 18.3px -2.5px hsl(var(--shadow-color) / 0.48);
+    --shadow-elevation-high:
+      0px 0.8px 0.9px hsl(var(--shadow-color) / 0.45),
+      0px 6.3px 7.1px -0.5px hsl(var(--shadow-color) / 0.45),
+      0.1px 13.2px 14.9px -1px hsl(var(--shadow-color) / 0.45),
+      0.1px 25.5px 28.7px -1.5px hsl(var(--shadow-color) / 0.45),
+      0.2px 47px 52.9px -2px hsl(var(--shadow-color) / 0.45),
+      0.4px 81.5px 91.7px -2.5px hsl(var(--shadow-color) / 0.45);
+  }
   /*
   1. Use a more-intuitive box-sizing model.
   */
@@ -19,6 +42,8 @@ const GlobalStyles = createGlobalStyle`
   */
   html, body, #root {
     height: 100%;
+    /* TODO: remove bg color from here */
+    background-color: var(--bg-color-light-primary);
   }
   /*
   Typographic tweaks!
