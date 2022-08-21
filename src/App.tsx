@@ -1,4 +1,8 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { AuthContext, SignOutButton } from "./context/AuthContext";
+import LoginPrompt from "./components/LoginPrompt";
+import { Toaster } from "react-hot-toast";
 
 const Container = styled.div`
   /* border: 1rem solid cornflowerblue; */
@@ -8,6 +12,7 @@ const Container = styled.div`
 `;
 const Header = styled.header`
   border: 1px solid yellow;
+  /* TODO: replace with css variable */
   height: 80px;
 `;
 const MainContentContainer = styled.div`
@@ -34,15 +39,18 @@ const Footer = styled.footer`
 `;
 
 function App() {
+  const { user } = useContext(AuthContext);
   return (
     <Container>
-      <Header>Header</Header>
+      <Header>{user ? <SignOutButton /> : "Please sign in"}</Header>
       <MainContentContainer>
         <LeftSidebar>Left Sidebar</LeftSidebar>
-        <Main>Main</Main>
+        <Main>{user ? "Main" : <LoginPrompt />}</Main>
         <RightSidebar>Right Sidebar</RightSidebar>
       </MainContentContainer>
-      <Footer>Footer</Footer>
+      <Footer>
+        <Toaster />
+      </Footer>
     </Container>
   );
 }
