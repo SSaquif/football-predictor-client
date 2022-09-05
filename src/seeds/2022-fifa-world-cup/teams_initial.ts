@@ -1,4 +1,4 @@
-import { WC2022Teams } from "../../models/2022-fifa-world-cup/Teams";
+import WC2022Teams from "../../models/2022-fifa-world-cup/Teams";
 
 const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
   {
@@ -7,7 +7,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "A",
     flag: "", //replace with url, use storage?
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -21,7 +21,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "A",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -35,7 +35,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "A",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -49,7 +49,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "A",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -63,7 +63,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "ENG",
     group: "B",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -77,7 +77,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "B",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -91,7 +91,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "USA",
     group: "B",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -105,7 +105,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "B",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -119,7 +119,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "C",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -133,7 +133,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "C",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -147,7 +147,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "C",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -161,7 +161,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "C",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -175,7 +175,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "D",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -189,7 +189,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "D",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -203,7 +203,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "D",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -217,7 +217,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "D",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -231,7 +231,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "E",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -245,7 +245,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "E",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -259,7 +259,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "E",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -273,7 +273,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "E",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -287,7 +287,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "F",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -301,7 +301,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "F",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -315,7 +315,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "F",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -329,7 +329,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "F",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -343,7 +343,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "G",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -357,7 +357,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "G",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -371,7 +371,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "G",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -385,7 +385,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "G",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -399,7 +399,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "H",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -413,7 +413,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "H",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -427,7 +427,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "H",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,
@@ -441,7 +441,7 @@ const WC_2022_INITIAL_TEAM_SEEDS: WC2022Teams[] = [
     code: "",
     group: "H",
     flag: "",
-    elimination: null, // eventually the round of elimination
+    finalStanding: null,
     groupStageGoalsScored: 0,
     groupStageGoalsAgainst: 0,
     groupStageMatchesPlayed: 0,

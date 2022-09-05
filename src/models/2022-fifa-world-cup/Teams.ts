@@ -1,5 +1,5 @@
 // name is the unique id
-export interface WC2022Teams {
+interface WC2022Teams {
   name:
     | "Australia"
     | "Argentina"
@@ -37,16 +37,16 @@ export interface WC2022Teams {
   code: string; //make enum
   group: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
   flag: string; // get url for storage bucket
-  elimination:
+  finalStanding:
     | "4th Group Stage"
     | "3rd Group Stage"
     | "Round of 16"
-    | "Round of 8"
+    | "Quarter Final"
     | "4th Place"
     | "3rd Place"
     | "Runner-Ups"
     | "Champions"
-    | null;
+    | null; // If still playing
   groupStageGoalsScored: number;
   groupStageGoalsAgainst: number;
   groupStageMatchesPlayed: 0 | 1 | 2 | 3;
@@ -54,3 +54,5 @@ export interface WC2022Teams {
   groupStageLoses: 0 | 1 | 2 | 3;
   groupStageDraws: 0 | 1 | 2 | 3;
 }
+
+export default WC2022Teams;
