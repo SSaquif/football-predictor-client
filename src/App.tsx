@@ -7,14 +7,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 
 const Container = styled.div`
-  /* border: 1rem solid cornflowerblue; */
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
 const Header = styled.header`
   border: 1px solid yellow;
-  /* TODO: replace with css variable */
   height: var(--header-height);
 `;
 const MainContentContainer = styled.div`

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Dashboard: React.FC<React.PropsWithChildren> = () => {
+const RootNavBar: React.FC<React.PropsWithChildren> = () => {
   return (
     <ul>
       <li>
@@ -16,4 +16,4 @@ const Dashboard: React.FC<React.PropsWithChildren> = () => {
   );
 };
 
-export default Dashboard;
+export default RootNavBar;
