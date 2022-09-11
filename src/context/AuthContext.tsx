@@ -13,75 +13,99 @@ import {
   query,
   where,
   addDoc,
+  getDoc,
 } from "firebase/firestore";
 import toast from "react-hot-toast";
 import firebaseApp from "../firebase/firebase-config";
-import { User } from "../models/User";
 
 interface AuthContextData {
-  user: FirebaseUser | null;
-  setUser: React.Dispatch<React.SetStateAction<FirebaseUser | null>>;
+  userAuth: FirebaseUser | null;
+  setUserAuth: React.Dispatch<React.SetStateAction<FirebaseUser | null>>;
+  userSummaries: any;
+  setUserSummaries: React.Dispatch<React.SetStateAction<any>>;
   authLoading: boolean;
   setAuthLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const AuthContext = createContext({ user: null } as AuthContextData);
+export const AuthContext = createContext({ userAuth: null } as AuthContextData);
 
 export default function AuthProvider({ children }: React.PropsWithChildren) {
   const [authLoading, setAuthLoading] = useState<boolean>(false);
-  // const [user, setUser] = useState<FirebaseUser | User | null>(null);
-  const [user, setUser] = useState<any>(null);
+  const [userAuth, setUserAuth] = useState<FirebaseUser | null>(null);
+  //TODO: replace any with proper type
+  const [userSummaries, setUserSummaries] = useState<any>(null);
+
   // Get Existing User or Create New User
   const getOrCreateUser = async () => {
     const db = getFirestore(firebaseApp);
     try {
-      const usersRef = collection(db, "users");
-      const q = query(usersRef, where("uid", "==", user?.uid));
+      // TODO: rename this collection to userAppData or something
+      const usersRef = collection(db, "userSummaries");
+      const q = query(usersRef, where("uid", "==", userAuth?.uid));
       const querySnap = await getDocs(q);
 
-      // new user
-      if (querySnap.empty && user) {
-        const { email, phoneNumber, photoURL, uid } = user;
-        await addDoc(usersRef, { email, phoneNumber, photoURL, uid });
-      } else if (querySnap.docs.length && querySnap.docs.length !== 1) {
-        throw new Error("Multiple User Accounts");
+      if (querySnap.docs.length && querySnap.docs.length !== 1) {
+        // Multiple UserSummaries for same Google acount
+        // FYI: this should technically never happen
+        throw new Error("Multiple Accounts");
+      } else if (querySnap.empty && userAuth) {
+        // Create new user
+        const { email, phoneNumber, photoURL, uid } = userAuth;
+        const docRef = await addDoc(usersRef, {
+          email,
+          phoneNumber,
+          photoURL,
+          uid,
+          isAdmin: false,
+        });
+        // Get the newly created doc And update state
+        const querySnap = await getDoc(docRef);
+        if (querySnap.exists()) {
+          setUserSummaries(querySnap.data());
+        }
       } else {
-        const appData = querySnap.docs[0].data();
-        setUser({ firebaseData: user, appData });
+        // Otherwise Just update state
+        setUserSummaries(querySnap.docs[0].data());
       }
     } catch (err: any) {
       const errorLogsRef = collection(db, "errorLogs");
       let event = "User creation error";
-      if (err.message == "Multiple User Accounts") {
-        event == "Detected Multiple Accounts with same Google Account";
+      if ((err.message = "Multiple Accounts")) {
+        event = "Multiple userAppData docs for same Google Account";
       }
       await addDoc(errorLogsRef, {
         errorMsg: err.message,
         timestamp: new Date(),
-        event,
-        userUid: user?.uid,
-        userEmail: user?.email,
+        event: event,
+        userUid: userAuth?.uid,
+        userEmail: userAuth?.email,
       });
-
-      setUser(null);
-      // TODO: Make toaster cancelable, lessen duration
-      toast.error("Error creating user", { duration: 5000 });
+      // This is ok cause we skip this function call when user is null
+      // FYI: So should not cause infinite re-renders
+      setUserAuth(null);
+      toast.error("Error creating/retrieving user", { duration: 5000 });
     } finally {
       setAuthLoading(false);
     }
   };
 
-  // TODO: fix this flow, is fucking shit up, // may use separate state for Appdata
   useEffect(() => {
-    if (user) {
+    if (userAuth) {
       setAuthLoading(true);
       getOrCreateUser();
     }
-  }, [user]);
+  }, [userAuth]);
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, authLoading, setAuthLoading }}
+      value={{
+        userAuth,
+        setUserAuth,
+        userSummaries,
+        setUserSummaries,
+        authLoading,
+        setAuthLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>
@@ -93,12 +117,12 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
  */
 
 export function SignInButton() {
-  const { setUser } = useContext(AuthContext);
+  const { setUserAuth } = useContext(AuthContext);
   const signInWithGoogle = () => {
     signInWithPopup(getAuth(firebaseApp), new GoogleAuthProvider())
       .then((result) => {
         const { user } = result;
-        setUser(user);
+        setUserAuth(user);
       })
       .catch((err) => {
         const db = getFirestore(firebaseApp);
@@ -118,14 +142,15 @@ export function SignInButton() {
   return <button onClick={signInWithGoogle}>Sign In with Google</button>;
 }
 
+// TODO: remember to clear up any new states on log out
 export function SignOutButton() {
-  const { setUser } = useContext(AuthContext);
+  const { setUserAuth, setUserSummaries } = useContext(AuthContext);
 
   const handleSignOut = () => {
     signOut(getAuth(firebaseApp))
       .then(() => {
-        console.log("signed out");
-        setUser(null);
+        setUserAuth(null);
+        setUserSummaries(null);
       })
       .catch((err) => {
         const db = getFirestore(firebaseApp);
