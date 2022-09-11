@@ -1,3 +1,4 @@
+// TODO: This interface could potentially be reusable across multiple competitions
 interface WC2022Matches {
   round:
     | "Group Stage"
