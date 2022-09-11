@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import toast from "react-hot-toast";
 import firebaseApp from "../firebase/firebase-config";
+import { User } from "../models/User";
 
 interface AuthContextData {
   user: FirebaseUser | null;
@@ -28,32 +29,40 @@ export const AuthContext = createContext({ user: null } as AuthContextData);
 
 export default function AuthProvider({ children }: React.PropsWithChildren) {
   const [authLoading, setAuthLoading] = useState<boolean>(false);
-  const [user, setUser] = useState<FirebaseUser | null>(null);
-
+  // const [user, setUser] = useState<FirebaseUser | User | null>(null);
+  const [user, setUser] = useState<any>(null);
   // Get Existing User or Create New User
   const getOrCreateUser = async () => {
     const db = getFirestore(firebaseApp);
     try {
       const usersRef = collection(db, "users");
       const q = query(usersRef, where("uid", "==", user?.uid));
-      const snapshot = await getDocs(q);
+      const querySnap = await getDocs(q);
 
       // new user
-      if (snapshot.empty && user) {
+      if (querySnap.empty && user) {
         const { email, phoneNumber, photoURL, uid } = user;
         await addDoc(usersRef, { email, phoneNumber, photoURL, uid });
+      } else if (querySnap.docs.length && querySnap.docs.length !== 1) {
+        throw new Error("Multiple User Accounts");
+      } else {
+        const appData = querySnap.docs[0].data();
+        setUser({ firebaseData: user, appData });
       }
-
-      setUser(user);
     } catch (err: any) {
       const errorLogsRef = collection(db, "errorLogs");
+      let event = "User creation error";
+      if (err.message == "Multiple User Accounts") {
+        event == "Detected Multiple Accounts with same Google Account";
+      }
       await addDoc(errorLogsRef, {
         errorMsg: err.message,
         timestamp: new Date(),
-        event: "User creation error",
+        event,
         userUid: user?.uid,
         userEmail: user?.email,
       });
+
       setUser(null);
       // TODO: Make toaster cancelable, lessen duration
       toast.error("Error creating user", { duration: 5000 });
@@ -62,8 +71,8 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
     }
   };
 
+  // TODO: fix this flow, is fucking shit up, // may use separate state for Appdata
   useEffect(() => {
-    // TODO: cleanup maybe with AbortController
     if (user) {
       setAuthLoading(true);
       getOrCreateUser();
