@@ -17,6 +17,9 @@ import {
 } from "firebase/firestore";
 import toast from "react-hot-toast";
 import firebaseApp from "../firebase/firebase-config";
+import converter from "../firebase/utils/converter";
+import UserSummaries from "../models/UserSummaries";
+import ErrorLogs from "../models/ErrorLogs";
 
 interface AuthContextData {
   userAuth: FirebaseUser | null;
@@ -39,8 +42,9 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
   const getOrCreateUser = async () => {
     const db = getFirestore(firebaseApp);
     try {
-      // TODO: rename this collection to userAppData or something
-      const usersRef = collection(db, "userSummaries");
+      const usersRef = collection(db, "userSummaries").withConverter(
+        converter<UserSummaries>()
+      );
       const q = query(usersRef, where("uid", "==", userAuth?.uid));
       const querySnap = await getDocs(q);
 
@@ -68,7 +72,9 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
         setUserSummaries(querySnap.docs[0].data());
       }
     } catch (err: any) {
-      const errorLogsRef = collection(db, "errorLogs");
+      const errorLogsRef = collection(db, "errorLogs").withConverter(
+        converter<ErrorLogs>()
+      );
       let event = "User creation error";
       if ((err.message = "Multiple Accounts")) {
         event = "Multiple userAppData docs for same Google Account";
@@ -126,7 +132,9 @@ export function SignInButton() {
       })
       .catch((err) => {
         const db = getFirestore(firebaseApp);
-        const errorLogsRef = collection(db, "errorLogs");
+        const errorLogsRef = collection(db, "errorLogs").withConverter(
+          converter<ErrorLogs>()
+        );
         addDoc(errorLogsRef, {
           errorMsg: err.message,
           code: err.code,
@@ -154,7 +162,9 @@ export function SignOutButton() {
       })
       .catch((err) => {
         const db = getFirestore(firebaseApp);
-        const errorLogsRef = collection(db, "errorLogs");
+        const errorLogsRef = collection(db, "errorLogs").withConverter(
+          converter<ErrorLogs>()
+        );
         addDoc(errorLogsRef, {
           errorMsg: err.message,
           code: err.code,
