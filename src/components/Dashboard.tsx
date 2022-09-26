@@ -1,19 +1,5 @@
-import React from "react";
-
-const RootNavBar: React.FC<React.PropsWithChildren> = () => {
-  return (
-    <ul>
-      <li>
-        <button>Create a League</button>
-      </li>
-      <li>
-        <button>Leagues</button>
-      </li>
-      <li>
-        <button>Rules</button>
-      </li>
-    </ul>
-  );
+const DashBoard: React.FC<React.PropsWithChildren> = () => {
+  return <>User DashBoard</>;
 };
 
-export default RootNavBar;
+export default DashBoard;

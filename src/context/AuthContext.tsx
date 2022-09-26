@@ -24,8 +24,8 @@ import ErrorLogs, { ErrorEvent } from "../models/ErrorLogs";
 interface AuthContextData {
   userAuth: FirebaseUser | null;
   setUserAuth: React.Dispatch<React.SetStateAction<FirebaseUser | null>>;
-  userSummaries: any;
-  setUserSummaries: React.Dispatch<React.SetStateAction<any>>;
+  userSummaries: UserSummaries | null;
+  setUserSummaries: React.Dispatch<React.SetStateAction<UserSummaries | null>>;
   authLoading: boolean;
   setAuthLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -35,8 +35,9 @@ export const AuthContext = createContext({ userAuth: null } as AuthContextData);
 export default function AuthProvider({ children }: React.PropsWithChildren) {
   const [authLoading, setAuthLoading] = useState<boolean>(false);
   const [userAuth, setUserAuth] = useState<FirebaseUser | null>(null);
-  //TODO: replace any with proper type
-  const [userSummaries, setUserSummaries] = useState<any>(null);
+  const [userSummaries, setUserSummaries] = useState<UserSummaries | null>(
+    null
+  );
 
   // Get Existing User or Create New User
   const getOrCreateUser = async () => {

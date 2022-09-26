@@ -5,6 +5,9 @@ import LoginPage from "./components/LoginPage";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import AdminDashboard from "./components/AdminDashboard";
+import UserLeftSideBar from "./components/UserLeftSideBar";
+import AdminLeftSidebar from "./components/AdminLeftSideBar";
 
 const Container = styled.div`
   display: flex;
@@ -39,17 +42,27 @@ const Footer = styled.footer`
 `;
 
 function App() {
-  const { userAuth } = useContext(AuthContext);
+  const { userAuth, userSummaries } = useContext(AuthContext);
   return (
     <BrowserRouter>
       {userAuth ? (
         <Container>
           <Header>{userAuth ? <SignOutButton /> : "Please sign in"}</Header>
           <MainContentContainer>
-            <LeftSidebar>Left Sidebar</LeftSidebar>
+            <LeftSidebar>
+              {userSummaries?.isAdmin ? (
+                <AdminLeftSidebar />
+              ) : (
+                <UserLeftSideBar />
+              )}
+            </LeftSidebar>
             <Main>
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                {userSummaries?.isAdmin ? (
+                  <Route path="/" element={<AdminDashboard />} />
+                ) : (
+                  <Route path="/" element={<Dashboard />} />
+                )}
               </Routes>
             </Main>
             <RightSidebar>Right Sidebar</RightSidebar>
