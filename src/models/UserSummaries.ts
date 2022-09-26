@@ -7,6 +7,7 @@ type FirebaseProps = Pick<
   "email" | "phoneNumber" | "photoURL" | "uid"
 >;
 
+// TODO: update any type
 type UserSummaries = FirebaseProps & { isAdmin: boolean; competitions?: any[] };
 
 export default UserSummaries;

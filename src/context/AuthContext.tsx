@@ -19,7 +19,7 @@ import toast from "react-hot-toast";
 import firebaseApp from "../firebase/firebase-config";
 import converter from "../firebase/utils/converter";
 import UserSummaries from "../models/UserSummaries";
-import ErrorLogs from "../models/ErrorLogs";
+import ErrorLogs, { ErrorEvent } from "../models/ErrorLogs";
 
 interface AuthContextData {
   userAuth: FirebaseUser | null;
@@ -51,7 +51,7 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
       if (querySnap.docs.length && querySnap.docs.length !== 1) {
         // Multiple UserSummaries for same Google acount
         // FYI: this should technically never happen
-        throw new Error("Multiple Accounts");
+        throw new Error("Multiple UserAppData Docs for Same Google Account");
       } else if (querySnap.empty && userAuth) {
         // Create new user
         const { email, phoneNumber, photoURL, uid } = userAuth;
@@ -75,10 +75,8 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
       const errorLogsRef = collection(db, "errorLogs").withConverter(
         converter<ErrorLogs>()
       );
-      let event = "User creation error";
-      if ((err.message = "Multiple Accounts")) {
-        event = "Multiple userAppData docs for same Google Account";
-      }
+      let event: ErrorEvent = "User Creation Error";
+
       await addDoc(errorLogsRef, {
         errorMsg: err.message,
         timestamp: new Date(),
@@ -139,7 +137,7 @@ export function SignInButton() {
           errorMsg: err.message,
           code: err.code,
           timestamp: new Date(),
-          event: "Google sign in failure",
+          event: "Google Sign In Failure",
         });
         toast.error("Google Sign In Failure, please try again in a Moment", {
           duration: 5000,
@@ -169,7 +167,7 @@ export function SignOutButton() {
           errorMsg: err.message,
           code: err.code,
           timestamp: new Date(),
-          event: "Google sign out failure",
+          event: "Google Sign Out Failure",
         });
         toast.error("Google Sign Out Failure, please try again in a Moment", {
           duration: 5000,

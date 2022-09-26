@@ -1,10 +1,15 @@
 import { User as FirebaseUser } from "firebase/auth";
 
+export type ErrorEvent =
+  | "User Creation Error"
+  | "Google Sign In Failure"
+  | "Google Sign Out Failure";
+
 interface ErrorLogs {
   errorMsg: string;
-  event: string;
+  event: ErrorEvent;
   timestamp: Date;
-  code?: any;
+  code?: any; // any is fine
   userUid?: FirebaseUser["uid"];
   userEmail?: FirebaseUser["email"];
 }

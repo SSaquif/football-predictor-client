@@ -1,4 +1,4 @@
-// Idea taken from: https://medium.com/swlh/using-firestore-with-typescript-65bd2a602945
+// https://medium.com/swlh/using-firestore-with-typescript-65bd2a602945
 import { QueryDocumentSnapshot } from "firebase/firestore";
 
 const converter = <T>() => ({
