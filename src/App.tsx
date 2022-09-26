@@ -41,7 +41,8 @@ const Footer = styled.footer`
 function App() {
   const { userAuth } = useContext(AuthContext);
   return (
-    <BrowserRouter>
+    // <BrowserRouter>
+    <>
       {userAuth ? (
         <Container>
           <Header>{userAuth ? <SignOutButton /> : "Please sign in"}</Header>
@@ -61,7 +62,8 @@ function App() {
       ) : (
         <LoginPage />
       )}
-    </BrowserRouter>
+    </>
+    // </BrowserRouter>
   );
 }
 
