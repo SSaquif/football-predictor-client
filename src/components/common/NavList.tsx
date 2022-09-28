@@ -17,9 +17,11 @@ const NavList: React.FC<
   NavListProps & React.HTMLAttributes<HTMLUListElement>
 > = ({ children, className, style }) => {
   return (
-    <StyledUL className={className} style={{ ...style }}>
-      {children}
-    </StyledUL>
+    <nav>
+      <StyledUL className={className} style={{ ...style }}>
+        {children}
+      </StyledUL>
+    </nav>
   );
 };
 

@@ -6,8 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import AdminDashboard from "./components/AdminDashboard";
-import UserLeftSideBar from "./components/UserLeftSideBar";
-import AdminLeftSidebar from "./components/AdminLeftSideBar";
+import SiteNavbar from "./components/SiteNavbar";
 
 const Container = styled.div`
   display: flex;
@@ -50,11 +49,7 @@ function App() {
           <Header>{userAuth ? <SignOutButton /> : "Please sign in"}</Header>
           <MainContentContainer>
             <LeftSidebar>
-              {userSummaries?.isAdmin ? (
-                <AdminLeftSidebar />
-              ) : (
-                <UserLeftSideBar />
-              )}
+              {userSummaries?.isAdmin && <SiteNavbar />}
             </LeftSidebar>
             <Main>
               <Routes>

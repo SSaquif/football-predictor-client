@@ -28,6 +28,8 @@ interface AuthContextData {
   setUserSummaries: React.Dispatch<React.SetStateAction<UserSummaries | null>>;
   authLoading: boolean;
   setAuthLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  userViewMode: boolean;
+  changeUserViewMode: (isUserViewMode: boolean) => void;
 }
 
 export const AuthContext = createContext({ userAuth: null } as AuthContextData);
@@ -38,6 +40,12 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
   const [userSummaries, setUserSummaries] = useState<UserSummaries | null>(
     null
   );
+  const [userViewMode, setUserViewMode] = useState<boolean>(false);
+
+  function changeUserViewMode(isUserViewMode: boolean): void {
+    if (userSummaries?.isAdmin) setUserViewMode(isUserViewMode);
+    return;
+  }
 
   // Get Existing User or Create New User
   const getOrCreateUser = async () => {
@@ -110,6 +118,8 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
         setUserSummaries,
         authLoading,
         setAuthLoading,
+        userViewMode,
+        changeUserViewMode,
       }}
     >
       {children}

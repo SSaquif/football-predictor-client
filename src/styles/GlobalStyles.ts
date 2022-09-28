@@ -56,7 +56,7 @@ const GlobalStyles = createGlobalStyle`
   5. Improve text rendering
   */
   body {
-    font-family: Open-Sans, Helvetica, Sans-Serif;
+    font-family: system-ui;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
