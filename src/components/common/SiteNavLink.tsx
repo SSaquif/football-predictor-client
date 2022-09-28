@@ -21,13 +21,13 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-interface NavItemProps extends React.PropsWithChildren {
+interface SiteNavLinkProps extends React.PropsWithChildren {
   style?: React.CSSProperties;
   linkStyle?: React.CSSProperties;
 }
 
-const NavItem: React.FC<
-  NavItemProps & NavLinkProps & React.HTMLAttributes<HTMLLIElement>
+const SiteNavLink: React.FC<
+  SiteNavLinkProps & NavLinkProps & React.HTMLAttributes<HTMLLIElement>
 > = ({ children, className, style, linkStyle, to }) => {
   return (
     <StyledLI className={className} style={{ ...style }}>
@@ -38,4 +38,4 @@ const NavItem: React.FC<
   );
 };
 
-export default NavItem;
+export default SiteNavLink;

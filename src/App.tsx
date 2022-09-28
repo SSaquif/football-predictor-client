@@ -49,7 +49,7 @@ function App() {
           <Header>{userAuth ? <SignOutButton /> : "Please sign in"}</Header>
           <MainContentContainer>
             <LeftSidebar>
-              {userSummaries?.isAdmin && <SiteNavbar />}
+              <SiteNavbar />
             </LeftSidebar>
             <Main>
               <Routes>

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import NavItem from "./common/NavItem";
+import SiteNavLink from "./common/SiteNavLink";
+import SiteNavBtn from "./common/SiteNavBtn";
 import NavList from "./common/NavList";
 
 const SiteNavbar: React.FC = () => {
@@ -8,17 +9,15 @@ const SiteNavbar: React.FC = () => {
   return (
     <div>
       <NavList>
-        <NavItem to={"/"}>Home</NavItem>
-        {/* Should be Btn that causes transition*/}
+        <SiteNavLink to={"/"}>Home</SiteNavLink>
         {userSummaries?.isAdmin && (
-          <NavItem to={"/comp-controls"}>Competitions Controls</NavItem>
+          <SiteNavBtn>Competitions Controls</SiteNavBtn>
         )}
-        <NavItem to={"/competitions"}>Competitions</NavItem>
-        {/* Should be Btn that causes transition*/}
-        <NavItem to={"/create-league"}>Create a League</NavItem>
-        {/* Should be Btn that causes transition*/}
-        <NavItem to={"/user-leagues"}>Your Leagues</NavItem>
-        <NavItem to={"/rules"}>Rules</NavItem>
+        <SiteNavBtn>Competitions</SiteNavBtn>
+        <SiteNavLink to={"/create-league"}>Create a League</SiteNavLink>
+        <SiteNavBtn>Your Leagues</SiteNavBtn>
+        {/* Rules Should be a link that also causes transition */}
+        <SiteNavLink to={"/rules"}>Rules</SiteNavLink>
       </NavList>
     </div>
   );
