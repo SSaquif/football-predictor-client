@@ -7,7 +7,7 @@ type FirebaseProps = Pick<
   "email" | "phoneNumber" | "photoURL" | "uid"
 >;
 
-// TODO: update any type
-type UserSummaries = FirebaseProps & { isAdmin: boolean; competitions?: any[] };
+// TODO: update any type, rename to singular everywhere
+type UserSummary = FirebaseProps & { isAdmin: boolean; competitions?: any[] };
 
-export default UserSummaries;
+export default UserSummary;

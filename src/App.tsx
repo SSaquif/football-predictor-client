@@ -41,7 +41,7 @@ const Footer = styled.footer`
 `;
 
 function App() {
-  const { userAuth, userSummaries } = useContext(AuthContext);
+  const { userAuth, userSummary } = useContext(AuthContext);
   return (
     <BrowserRouter>
       {userAuth ? (
@@ -53,7 +53,7 @@ function App() {
             </LeftSidebar>
             <Main>
               <Routes>
-                {userSummaries?.isAdmin ? (
+                {userSummary?.isAdmin ? (
                   <Route path="/" element={<AdminDashboard />} />
                 ) : (
                   <Route path="/" element={<Dashboard />} />

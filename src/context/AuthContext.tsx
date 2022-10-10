@@ -18,14 +18,14 @@ import {
 import toast from "react-hot-toast";
 import firebaseApp from "../firebase/firebase-config";
 import converter from "../firebase/utils/converter";
-import UserSummaries from "../models/UserSummaries";
+import UserSummary from "../models/UserSummary";
 import ErrorLogs, { ErrorEvent } from "../models/ErrorLogs";
 
 interface AuthContextData {
   userAuth: FirebaseUser | null;
   setUserAuth: React.Dispatch<React.SetStateAction<FirebaseUser | null>>;
-  userSummaries: UserSummaries | null;
-  setUserSummaries: React.Dispatch<React.SetStateAction<UserSummaries | null>>;
+  userSummary: UserSummary | null;
+  setUserSummary: React.Dispatch<React.SetStateAction<UserSummary | null>>;
   authLoading: boolean;
   setAuthLoading: React.Dispatch<React.SetStateAction<boolean>>;
   userViewMode: boolean;
@@ -37,13 +37,11 @@ export const AuthContext = createContext({ userAuth: null } as AuthContextData);
 export default function AuthProvider({ children }: React.PropsWithChildren) {
   const [authLoading, setAuthLoading] = useState<boolean>(false);
   const [userAuth, setUserAuth] = useState<FirebaseUser | null>(null);
-  const [userSummaries, setUserSummaries] = useState<UserSummaries | null>(
-    null
-  );
+  const [userSummary, setUserSummary] = useState<UserSummary | null>(null);
   const [userViewMode, setUserViewMode] = useState<boolean>(false);
 
   function changeUserViewMode(isUserViewMode: boolean): void {
-    if (userSummaries?.isAdmin) setUserViewMode(isUserViewMode);
+    if (userSummary?.isAdmin) setUserViewMode(isUserViewMode);
     return;
   }
 
@@ -51,14 +49,14 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
   const getOrCreateUser = async () => {
     const db = getFirestore(firebaseApp);
     try {
-      const usersRef = collection(db, "userSummaries").withConverter(
-        converter<UserSummaries>()
+      const usersRef = collection(db, "userSummary").withConverter(
+        converter<UserSummary>()
       );
       const q = query(usersRef, where("uid", "==", userAuth?.uid));
       const querySnap = await getDocs(q);
 
       if (querySnap.docs.length && querySnap.docs.length !== 1) {
-        // Multiple UserSummaries for same Google acount
+        // Multiple UserSummary for same Google acount
         // FYI: this should technically never happen
         throw new Error("Multiple UserAppData Docs for Same Google Account");
       } else if (querySnap.empty && userAuth) {
@@ -74,11 +72,11 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
         // Get the newly created doc And update state
         const querySnap = await getDoc(docRef);
         if (querySnap.exists()) {
-          setUserSummaries(querySnap.data());
+          setUserSummary(querySnap.data());
         }
       } else {
         // Otherwise Just update state
-        setUserSummaries(querySnap.docs[0].data());
+        setUserSummary(querySnap.docs[0].data());
       }
     } catch (err: any) {
       const errorLogsRef = collection(db, "errorLogs").withConverter(
@@ -114,8 +112,8 @@ export default function AuthProvider({ children }: React.PropsWithChildren) {
       value={{
         userAuth,
         setUserAuth,
-        userSummaries,
-        setUserSummaries,
+        userSummary,
+        setUserSummary,
         authLoading,
         setAuthLoading,
         userViewMode,
@@ -161,13 +159,13 @@ export function SignInButton() {
 
 // TODO: remember to clear up any new states on log out
 export function SignOutButton() {
-  const { setUserAuth, setUserSummaries } = useContext(AuthContext);
+  const { setUserAuth, setUserSummary } = useContext(AuthContext);
 
   const handleSignOut = () => {
     signOut(getAuth(firebaseApp))
       .then(() => {
         setUserAuth(null);
-        setUserSummaries(null);
+        setUserSummary(null);
       })
       .catch((err) => {
         const db = getFirestore(firebaseApp);
