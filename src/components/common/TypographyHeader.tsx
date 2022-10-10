@@ -22,13 +22,13 @@ const SmallHeader = styled.h3`
 `;
 
 // TODO: maybe do intersection type with all 3 types
-interface HeaderTypographyProps extends React.PropsWithChildren {
+interface TypographyHeaderProps extends React.PropsWithChildren {
   variant?: "large" | "medium" | "small";
   style?: React.CSSProperties;
 }
 
-const HeaderTypography: React.FC<
-  HeaderTypographyProps & React.HTMLAttributes<HTMLSpanElement>
+const TypographyHeader: React.FC<
+  TypographyHeaderProps & React.HTMLAttributes<HTMLSpanElement>
 > = ({ children, className, style, variant = "large" }) => {
   return (
     <>
@@ -49,4 +49,4 @@ const HeaderTypography: React.FC<
   );
 };
 
-export default HeaderTypography;
+export default TypographyHeader;

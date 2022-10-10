@@ -1,7 +1,7 @@
-import HeaderTypography from "./common/HeaderTypography";
+import TypographyHeader from "./common/TypographyHeader";
 
 const AdminDashboard: React.FC = () => {
-  return <HeaderTypography>Admin Dash Board</HeaderTypography>;
+  return <TypographyHeader>Admin Dash Board</TypographyHeader>;
 };
 
 export default AdminDashboard;

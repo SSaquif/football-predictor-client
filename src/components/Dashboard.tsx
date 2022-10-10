@@ -1,11 +1,11 @@
-import HeaderTypography from "./common/HeaderTypography";
+import TypographyHeader from "./common/TypographyHeader";
 
 const DashBoard: React.FC<React.PropsWithChildren> = () => {
   return (
     <>
-      <HeaderTypography>User DashBoard</HeaderTypography>
-      <HeaderTypography variant="medium">User DashBoard</HeaderTypography>
-      <HeaderTypography variant="small">User DashBoard</HeaderTypography>
+      <TypographyHeader>User DashBoard</TypographyHeader>
+      <TypographyHeader variant="medium">User DashBoard</TypographyHeader>
+      <TypographyHeader variant="small">User DashBoard</TypographyHeader>
       <>Hello</>
     </>
   );
