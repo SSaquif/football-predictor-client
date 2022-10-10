@@ -1,5 +1,5 @@
 // name is the unique id
-interface WC2022Teams {
+interface WC2022Team {
   name:
     | "Australia"
     | "Argentina"
@@ -46,13 +46,25 @@ interface WC2022Teams {
     | "3rd Place"
     | "Runner-Ups"
     | "Champions"
-    | null; // If still playing
-  groupStageGoalsScored: number;
+    | "TBA"; // If still playing
+  groupStageGoalsFor: number;
   groupStageGoalsAgainst: number;
   groupStageMatchesPlayed: 0 | 1 | 2 | 3;
   groupStageWins: 0 | 1 | 2 | 3;
   groupStageLoses: 0 | 1 | 2 | 3;
   groupStageDraws: 0 | 1 | 2 | 3;
+  isGroupWinner?: boolean;
+  isGroupRunnerUp?: boolean;
+  roundOf16GoalsFor?: number;
+  roundOf16GoalsAgainst?: number;
+  qfGoalsFor?: number;
+  qfGoalsAgainst?: number;
+  sfGoalsFor?: number;
+  sfGoalsAgainst?: number;
+  thirdPlacePlayoffGoalsFor?: number;
+  thirdPlacePlayoffGoalsAgainst?: number;
+  finalGoalsFor?: number;
+  finalGoalsAgainst?: number;
 }
 
-export default WC2022Teams;
+export default WC2022Team;
