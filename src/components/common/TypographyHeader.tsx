@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+/* TODO: looking into using Fluid Typography
+ * using vw + clamp instead of breakpoints (see Josh's Course)
+ */
 const LargeHeader = styled.h1`
   font-size: var(--text-large-xx);
   @media (max-width: 550px) {

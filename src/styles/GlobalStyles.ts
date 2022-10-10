@@ -11,22 +11,15 @@ const GlobalStyles = createGlobalStyle`
     --header-height: 60px;
     --footer-height: 60px;
     
-    /* Font Sizes */
-    /* Large Screen --> Header*/
-    --text-large-xx: 2.5rem;
-    /* Not used so far */
-    --text-large-x: 2rem;
-    /* Large Screen --> Sub Header, Mobile --> Header */
-    --text-large: 1.75rem;
-    /* Mobile --> Sub Header */
-    --text-medium: 1.5rem;
-    /* ALL Devices -> Body text  */
-    --text-small: 1.125rem;
-    /* Figcaptions, Form Labels */
-    --text-small-x: 1rem; // ie 16px
-    /* Not used so far */
+    /* Font Sizes */    
+    --text-large-xx: 2.5rem;    
+    --text-large-x: 2rem;    
+    --text-large: 1.75rem;    
+    --text-medium: 1.5rem;    
+    --text-small: 1.125rem; /* ALL Devices -> Body text  */    
+    --text-small-x: 1rem; // ie 16px    
     --text-small-xx: 0.75rem;
-    
+
     /* Background Colors */
     --bg-color-light-primary: #eeeeec;    
     
