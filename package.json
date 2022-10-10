@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/roboto-condensed": "^4.5.9",
     "firebase": "^9.9.3",
     "pretty-checkbox": "^3.0.3",
     "react": "^18.2.0",

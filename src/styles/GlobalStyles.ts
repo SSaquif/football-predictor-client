@@ -1,5 +1,6 @@
 // globalStyles.js
 import { createGlobalStyle } from "styled-components";
+import "@fontsource/roboto-condensed";
 // TODO: split into CSSVariables and CSSReset and GlobalStyles
 const GlobalStyles = createGlobalStyle`
  /*
@@ -10,8 +11,24 @@ const GlobalStyles = createGlobalStyle`
     --header-height: 60px;
     --footer-height: 60px;
     
+    /* Font Sizes */
+    /* Large Screen --> Header*/
+    --text-large-xx: 2.5rem;
+    /* Not used so far */
+    --text-large-x: 2rem;
+    /* Large Screen --> Sub Header, Mobile --> Header */
+    --text-large: 1.75rem;
+    /* Mobile --> Sub Header */
+    --text-medium: 1.5rem;
+    /* ALL Devices -> Body text  */
+    --text-small: 1.125rem;
+    /* Figcaptions, Form Labels */
+    --text-small-x: 1rem; // ie 16px
+    /* Not used so far */
+    --text-small-xx: 0.75rem;
+    
     /* Background Colors */
-    --bg-color-light-primary: #eeeeec;
+    --bg-color-light-primary: #eeeeec;    
     
     /* Box Shadows */
     --shadow-color: 60deg 2% 58%;
@@ -49,6 +66,8 @@ const GlobalStyles = createGlobalStyle`
   html, body, #root {
     height: 100%;    
     background-color: var(--bg-color-light-primary);
+    /* 16px is default, keeping here for reference */
+    /* font-size: 16px; */
   }
   /*
   Typographic tweaks!
@@ -56,9 +75,10 @@ const GlobalStyles = createGlobalStyle`
   5. Improve text rendering
   */
   body {
-    font-family: system-ui;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: var(--text-small);
   }
   /*
   6. Improve media defaults
